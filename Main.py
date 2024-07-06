@@ -81,6 +81,23 @@ def main():
         st.markdown(f"**Period for Savings:** {period_savings} months")
         st.markdown(f"**Monthly Savings Required:** {recurrent_savings:.2f}")
         st.markdown(f"**Total Savings from Early Amortization:** {total_saving_loan:.2f}")
+        
+        # Recommendation based on interest rates
+        if savings_interest_rate > interest_rate:
+            st.markdown("**Recommendation:** Paying off the loan 5 years earlier is beneficial because the savings interest rate is higher than the loan interest rate.")
+        else:
+            st.markdown("**Recommendation:** Paying off the loan 5 years earlier may not be beneficial because the savings interest rate is not higher than the loan interest rate.")
+        
+        # Chart for Savings
+        months = list(range(1, period_savings + 1))
+        savings_values = [recurrent_savings] * period_savings
+        plt.figure(figsize=(10, 5))
+        plt.plot(months, savings_values, label='Monthly Savings Required', color='green')
+        plt.xlabel('Months')
+        plt.ylabel('Savings Amount')
+        plt.title('Monthly Savings Required for Early Amortization')
+        plt.legend()
+        st.pyplot(plt)
     else:
         st.markdown("The amortization schedule does not have 60 entries.")
 

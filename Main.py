@@ -28,7 +28,7 @@ def calculate_amortization_schedule(interest_rate, duration, amount):
     total_Repayment = data["Repayment"].sum()
     return data, total_interest_paid, total_Repayment
 
-def savings(amount, period, interest=0.07):
+def savings(amount, period, interest):
     monthly_interest = interest / 12  # Monthly interest rate
     amount_periodic = amount * monthly_interest / ((1 + monthly_interest) ** period - 1)
     return amount_periodic
@@ -40,6 +40,7 @@ def main():
     interest_rate = st.sidebar.slider("Annual Interest Rate (%)", 0.1, 20.0, 5.0, 0.1)
     duration = st.sidebar.slider("Loan Duration (Years)", 1, 40, 10, 1)
     amount = st.sidebar.number_input("Loan Amount", min_value=1000, max_value=10000000, value=10000)
+    savings_interest_rate = st.sidebar.slider("Annual Savings Interest Rate (%)", 0.1, 20.0, 7.0, 0.1)
 
     data, total_interest_paid, total_Repayment = calculate_amortization_schedule(interest_rate / 100, duration, amount)
     
@@ -73,7 +74,7 @@ def main():
     if len(balance_last_5_year) >= 60:
         amount_needed = balance_last_5_year.iloc[-60]
         period_savings = data['Period'].iloc[-60]
-        recurrent_savings = int(savings(amount_needed, period_savings))
+        recurrent_savings = int(savings(amount_needed, period_savings, savings_interest_rate / 100))
         total_saving_loan = int((data["Repayment"].iloc[-1] * 60) - (recurrent_savings * period_savings))
         
         st.markdown(f"**Amount Needed to Amortize 5 Years Earlier:** {amount_needed:.2f}")

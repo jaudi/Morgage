@@ -38,8 +38,8 @@ def main():
     st.sidebar.title("Input Parameters")
     
     interest_rate = st.sidebar.slider("Annual Interest Rate (%)", 0.1, 20.0, 5.0, 0.1)
-    duration = st.sidebar.slider("Loan Duration (Years)", 1, 40, 10, 1)
-    amount = st.sidebar.number_input("Loan Amount", min_value=1000, max_value=10000000, value=10000)
+    duration = st.sidebar.slider("Loan Duration (Years)", 1, 40, 35, 1)
+    amount = st.sidebar.number_input("Loan Amount", min_value=1000, max_value=10000000, value=250000)
     savings_interest_rate = st.sidebar.slider("Annual Savings Interest Rate (%)", 0.1, 20.0, 7.0, 0.1)
 
     data, total_interest_paid, total_Repayment = calculate_amortization_schedule(interest_rate / 100, duration, amount)

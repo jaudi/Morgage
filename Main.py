@@ -75,7 +75,7 @@ def main():
         amount_needed = balance_last_5_year.iloc[-60]
         period_savings = data['Period'].iloc[-60]
         recurrent_savings = int(savings(amount_needed, period_savings, savings_interest_rate / 100))
-        total_saving_loan = int((data["Repayment"].iloc[-1] * 60) - (recurrent_savings * period_savings))
+        total_saving_loan = int((data["Interest"].iloc[-60:].sum())
         
         st.markdown(f"**Amount Needed to Amortize 5 Years Earlier:** {amount_needed:.2f}")
         st.markdown(f"**Period for Savings:** {period_savings} months")
